@@ -1,61 +1,45 @@
-from sqlalchemy.orm import Session
-from database import get_db, crud, schemas
-from fastapi import Depends, FastAPI, HTTPException
-from http import HTTPStatus
-from typing import List
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 
+from app.api.routes import router as employees_router
+from app.core.config import settings
+from app.core.logging_config import configure_logging, get_logger
 
-app = FastAPI()
-
-origins = [
-    "http://localhost:5173", #frontend host
-]
+configure_logging(settings.log_level)
+logger = get_logger("Application")
+app = FastAPI(
+    title="Employee Management API",
+    description=(
+        "Manage employee records, including personal details, admission dates, "
+        "and job roles."
+    ),
+    version="0.1.0",
+    openapi_tags=[
+        {
+            "name": "Employees",
+            "description": "Create, retrieve, update, and delete employee records.",
+        }
+    ],
+)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["http://localhost:5173"],
     allow_credentials=True,
     allow_methods=["*"],
-    allow_headers=["*"],  
+    allow_headers=["*"],
 )
 
+app.include_router(employees_router)
 
 
-@app.get("/pessoas", response_model=List[schemas.Person])
-def read_pessoas(skip: int = 0, limit:int = 100, db: Session = Depends(get_db)):
-    items = crud.get_employees(db, skip, limit)
-    
-    return items
-
-@app.get("/pessoas/{pessoa_id}", response_model=schemas.Person)
-def read_user(pessoa_id: int, db: Session = Depends(get_db)):
-    db_user = crud.get_employee_by_id(db, pessoa_id)
-    if not db_user:
-        raise HTTPException(HTTPStatus.NOT_FOUND, "Pessoa não encontrada")
-
-    return db_user
-
-@app.post("/cadastro/", response_model=schemas.Person)
-def create_employee(employee: schemas.PersonCreate, db: Session = Depends(get_db)):
-    db_user = crud.get_employee_by_cpf(db, cpf_id=employee.cpf)
-    if db_user:
-        raise HTTPException(HTTPStatus.BAD_REQUEST, detail="Esta pessoa já está cadastrada")
-    
-    return crud.create_employee(db=db, employee=employee)
-
-@app.delete("/pessoas/{pessoa_id}")
-def delete_employee(pessoa_id: int, db: Session = Depends(get_db)):
-    pessoa = crud.delete_employee(db, pessoa_id)
-    if not pessoa:
-        raise HTTPException(HTTPStatus.NOT_FOUND, detail="Pessoa não encontrada")
-    
-    return {"status": "Pessoa deletada com sucesso"}
-
-@app.put("/pessoas/{pessoa_id}", response_model=schemas.Person)
-def update_employee(pessoa_id: int, pessoa: schemas.PersonCreate, db: Session = Depends(get_db)):
-    db_user = crud.update_employee(db, pessoa_id, pessoa)
-    if not db_user:
-        raise HTTPException(HTTPStatus.NOT_FOUND, "Pessoa não encontrada")
-    
-    return db_user
+@app.exception_handler(Exception)
+async def handle_unexpected_exception(
+    _request: Request, error: Exception
+) -> JSONResponse:
+    logger.error("Unhandled request error (%s)", type(error).__name__)
+    return JSONResponse(
+        status_code=500,
+        content={"detail": "Internal server error"},
+    )
