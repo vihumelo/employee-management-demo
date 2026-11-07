@@ -1,0 +1,144 @@
+.app-button {
+  min-height: 2.875rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  transition: transform 140ms ease, box-shadow 140ms ease;
+}
+
+.app-button:hover:not([aria-disabled="true"]) {
+  transform: translateY(-1px);
+}
+
+.app-text-field {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.app-text-field .label {
+  color: var(--color-ink);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.app-text-field .input {
+  min-height: 3rem;
+  border: 1px solid var(--color-line);
+  border-radius: 0.75rem;
+  background: var(--color-surface);
+  color: var(--color-ink);
+  box-shadow: 0 1px 2px rgb(17 24 39 / 3%);
+}
+
+.app-text-field .input:focus-visible {
+  border-color: var(--color-brand);
+  outline: 3px solid rgb(73 53 237 / 14%);
+  outline-offset: 1px;
+}
+
+.app-text-field [data-slot="description"] {
+  color: var(--color-muted);
+  font-size: 0.8125rem;
+}
+
+.app-text-field [data-slot="field-error"] {
+  color: var(--color-danger);
+  font-size: 0.8125rem;
+}
+
+.search-field {
+  position: relative;
+  min-width: 0;
+}
+
+.search-field-icon {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 1rem;
+  width: 1.35rem;
+  height: 1.35rem;
+  color: var(--color-muted);
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+.search-field-control .input {
+  min-height: 3.5rem;
+  padding-left: 3rem;
+  border-radius: 0.9rem;
+  font-size: 1rem;
+}
+
+.surface-card {
+  overflow: hidden;
+  border: 1px solid rgb(220 224 239 / 90%);
+  border-radius: var(--radius-card);
+  background: rgb(255 255 255 / 92%);
+  box-shadow: var(--shadow-card);
+}
+
+.surface-card-header {
+  padding: 1.25rem 1.5rem 0;
+}
+
+.surface-card-content {
+  padding: 1.5rem;
+}
+
+.surface-card-footer {
+  padding: 0 1.5rem 1.5rem;
+}
+
+.role-badge {
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+.role-badge--violet {
+  border-color: rgb(73 53 237 / 12%);
+  background: #eeeaff;
+  color: #4935ed;
+}
+
+.role-badge--blue {
+  border-color: rgb(37 99 235 / 12%);
+  background: #e7efff;
+  color: #1d4ed8;
+}
+
+.role-badge--green {
+  border-color: rgb(22 163 74 / 12%);
+  background: #e3f7e9;
+  color: #15803d;
+}
+
+.employee-actions-trigger {
+  min-width: 2.75rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-color: var(--color-line);
+  border-radius: 0.7rem;
+  background: white;
+  color: var(--color-ink);
+}
+
+.employee-actions-trigger svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+@media (max-width: 480px) {
+  .surface-card-header {
+    padding: 1rem 1rem 0;
+  }
+
+  .surface-card-content {
+    padding: 1rem;
+  }
+
+  .surface-card-footer {
+    padding: 0 1rem 1rem;
+  }
+}

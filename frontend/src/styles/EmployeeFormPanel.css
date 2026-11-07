@@ -1,0 +1,150 @@
+.employee-form-panel {
+  min-width: 0;
+  animation: employee-form-panel-enter 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes employee-form-panel-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(0.65rem, 0, 0) scale(0.995);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+.employee-form-panel.is-closing {
+  animation: employee-form-panel-exit 240ms cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+@keyframes employee-form-panel-exit {
+  from {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: translate3d(0.4rem, 0, 0) scale(0.99);
+  }
+}
+
+.employee-form-panel-card {
+  position: sticky;
+  top: 1.5rem;
+}
+
+.employee-form-panel-card .surface-card-content {
+  padding: 1.5rem;
+}
+
+.employee-form-panel-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.employee-form-panel-heading h2 {
+  margin: 0;
+  color: var(--color-ink);
+  font-size: clamp(1.35rem, 2vw, 1.65rem);
+  line-height: 1.2;
+  letter-spacing: -0.035em;
+}
+
+.employee-form-panel-heading p {
+  margin: 0.45rem 0 0;
+  color: var(--color-muted);
+  line-height: 1.5;
+}
+
+.employee-form-close {
+  min-width: 2.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  color: var(--color-muted);
+}
+
+.employee-form-close svg {
+  width: 1.35rem;
+  height: 1.35rem;
+}
+
+.employee-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.employee-form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 900px) {
+  .employee-form-panel {
+    animation-name: employee-form-panel-enter-mobile;
+    animation-duration: 380ms;
+  }
+
+  .employee-form-panel.is-closing {
+    animation-name: employee-form-panel-exit-mobile;
+  }
+
+  .employee-form-panel-card {
+    position: static;
+  }
+}
+
+@keyframes employee-form-panel-enter-mobile {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 0.5rem, 0) scale(0.995);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes employee-form-panel-exit-mobile {
+  from {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: translate3d(0, 0.35rem, 0) scale(0.99);
+  }
+}
+
+@media (max-width: 600px) {
+  .employee-form-panel-card {
+    min-height: calc(100vh - 8rem);
+  }
+
+  .employee-form-panel-card .surface-card-content {
+    padding: 1.15rem;
+  }
+
+  .employee-form-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .employee-form-panel {
+    animation: none;
+  }
+}

@@ -1,0 +1,75 @@
+.app-shell {
+  min-height: 100vh;
+}
+
+.app-header {
+  display: flex;
+  min-height: 5.625rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.875rem clamp(1rem, 3.2vw, 3.25rem);
+  border-bottom: 1px solid rgb(220 224 239 / 75%);
+  border-radius: 0 0 1.1rem 1.1rem;
+  background: rgb(255 255 255 / 88%);
+  box-shadow: 0 5px 22px rgb(46 51 103 / 5%);
+  backdrop-filter: blur(16px);
+}
+
+.app-brand {
+  display: inline-flex;
+  min-width: 0;
+  align-items: center;
+  gap: 0.875rem;
+  color: var(--color-ink);
+  font-size: clamp(1rem, 2vw, 1.4rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  text-decoration: none;
+}
+
+.app-brand-mark {
+  display: grid;
+  width: 2.875rem;
+  height: 2.875rem;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 0.8rem;
+  background: linear-gradient(145deg, #5b4afa, #3828dc);
+  box-shadow: 0 7px 16px rgb(73 53 237 / 24%);
+  color: white;
+}
+
+.app-brand-mark svg {
+  width: 1.55rem;
+  height: 1.55rem;
+}
+
+.app-content {
+  width: min(100% - 2rem, 90rem);
+  margin-inline: auto;
+  padding-block: clamp(2rem, 5vw, 4.25rem) 4rem;
+}
+
+@media (max-width: 480px) {
+  .app-header {
+    min-height: 4.5rem;
+    padding-inline: 1rem;
+  }
+
+  .app-brand {
+    gap: 0.625rem;
+    font-size: 1rem;
+  }
+
+  .app-brand-mark {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.7rem;
+  }
+
+  .app-content {
+    width: min(100% - 1.25rem, 90rem);
+    padding-block: 1.75rem 3rem;
+  }
+}

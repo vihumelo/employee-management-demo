@@ -1,0 +1,17 @@
+.employee-form-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.employee-form-date-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+@media (max-width: 480px) {
+  .employee-form-date-fields {
+    grid-template-columns: 1fr;
+  }
+}
